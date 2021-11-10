@@ -1,0 +1,60 @@
+#[eval exp="f.answer =intheperiodictable"]
+[commit name="f.answerbox"]
+
+以下、扉にてキーパッド(文字入力)利用の場合(未完成)
+
+*tag_searchdoor
+
+[cm]
+
+(扉)[r]
+
+扉には「」と書かれている。[r]
+扉のそばにキーパットがある。[l][r]
+
+[link target=*tag_enterpasscode] →キーパットで入力する [endlink][r]
+[link target=*tag_searchwest] →戻る [endlink][r]
+[s]
+
+*tag_enterpasscode
+
+[cm]
+
+開錠コードを入力してください。[r]
+
+[edit name="f.answerbox" maxchars=30]
+[button x=100 y=200 target="*confirm" graphic="edit.png"]
+[s]
+
+*confirm
+[dialog type="confirm" text="これでいいですか？" target="*ok" target_cancel="*cancel"]
+[s]
+
+*ok
+[commit name="f.answerbox"]
+[cm]
+
+あ [r][l]
+
+[if exp="f.answerbox==f.answer"]
+
+あい [r][l]
+
+[jump target="*tag_success"]
+
+あいう [r][l]
+
+[endif]
+[jump target="*tag_mistake"]
+
+*cancel
+[jump target="*tag_searchdoor"]
+
+*tag_mistake
+
+[cm]
+
+パスコードが異なります[l][r]
+[jump target="*tag_searchdoor"]
+
+↑ここまで
