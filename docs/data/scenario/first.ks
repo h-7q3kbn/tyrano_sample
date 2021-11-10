@@ -161,28 +161,46 @@
 *tag_enterpasscode
 
 [cm]
-[edit name="tf.test"]
-[button x=100 y=200 target="*jump" graphic="edit.png"]
+
+開錠コードを入力してください。[r]
+
+[edit name="f.answerbox" maxchars=30]
+[button x=100 y=200 target="*confirm" graphic="edit.png"]
 [s]
 
-*jump
+*confirm
 [dialog type="confirm" text="これでいいですか？" target="*ok" target_cancel="*cancel"]
 [s]
 
 *ok
-[commit]
+[commit name="f.answerbox"]
 [cm]
-[jump target="*next"]
-[s]
+
+[eval exp="f.answer =intheperiodictable"]
+
+[if exp="f.answerbox==f.answer"]
+[jump target="*tag_success"]
+
+[endif]
+[jump target="*tag_mistake"]
 
 *cancel
-[jump target="*searchdoor"]
-[s]
+[jump target="*tag_searchdoor"]
+
+*tag_mistake
+
+[cm]
+
+パスコードが異なります[l][r]
+[jump target="*tag_searchdoor"]
 
 *tag_usekey
 
 鍵を差し込み、時計回りにひねる。 [l][r]
 「カチャリ」という音が響いた。 [l][r]
+
+*tag_success
+
 鍵が開いたようだ。 [l][r]
 
 link target=*tag_escape] →脱出する [endlink][r]
